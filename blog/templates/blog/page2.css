@@ -1,0 +1,123 @@
+/* pixels/16=em */
+
+body{
+	background-image: url("nightfade.png");
+	font-size:100%;
+}
+h1{
+	color: rgb(160,0,255);
+	font-size: 10em; /*5vw*/
+	font-family: monospace;
+	font-variant: small-caps;
+}
+p{
+	color: purple;
+	font-family: cursive;
+	font size: 0.875em; /*3vw*/
+}
+pre{
+	color: violet;
+	font:fantasy;
+	font-style: oblique;
+	font-size: 1vw; /*1em*/
+	text-align: left;
+}
+hr{
+	color: transparent;
+}
+p.homo{
+	font-family: verdana;
+
+}
+#gayo{
+	text-align:right;
+	color: rgb(255,122,255);
+	font-family:gay;
+	text-shadow:2px 2px hotpink;
+}
+div.box{
+	width:300px;
+	margin:10px;
+	border-left:6px solid mediumvioletred;
+	padding:5px;
+	background-color:palevioletred;
+	max-height:500px;
+	max-width:500px;
+}
+#matildo{
+	padding:10px;
+}
+#fuori{
+	margin: 10px;
+	background:deeppink;
+	outline: 3px solid purple;
+	outline-offset: 5px;
+}
+
+div.out{
+	width:300px;
+	margin:10px;
+	border-bottom:6px solid mediumvioletred;
+	border-left:6px solid mediumvioletred;
+	padding:5px;
+	background-color:palevioletred;
+	max-height:500px;
+	max-width:500px;
+
+}
+
+a:link, a:visited{
+	color: midnightblue;
+	background-color: navajowhite;
+	padding 25px 50px;
+	border: 2px solid mediumvioletred;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+a:hover, a:active{
+	background-color: plum;
+	color: mintcream;
+}
+
+ul{
+	list-style-image: url("sq_purple.gif");
+	background: #ff9999;
+	border-left: 6px solid mediumvioletred;
+	padding: 20px;
+}
+ul li{
+	background: #cce5ff;
+  padding: 5px;
+	margin: 5px;
+}
+
+#pymy{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#pymy th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+#pymy tr:hover {background-color:#ddd;}
+
+#pymy th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+		background-color: hotpink;
+    color: white;
+}
+
+div.imgbox{
+    float: left;
+    text-align: center;
+    width: 150px;
+    border: 1px solid gray;
+    margin: 4px;
+    padding: 6px;
+}
