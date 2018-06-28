@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
+from django.views.static import serve as staticserve
 from django.conf import settings
 from django.contrib import admin
 
@@ -24,3 +26,6 @@ urlpatterns = [
     url(r'', include('gallery.urls')),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += [url(r'^static/(?P<path>.*)$', staticserve, {'document_root': settings.STATIC_ROOT} )]
