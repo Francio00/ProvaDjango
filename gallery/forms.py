@@ -1,8 +1,12 @@
 from django import forms
-from .models import Post, Comments
+from .models import Photo, Video
 
-class MediaForm(forms.ModelForm)
+class PhotoForm(forms.ModelForm):
     class Meta:
-        model=Media
-        fields=('author','description',)
+        model=Photo
+        fields=('img','title','text',)
 
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model=Video
+        fields=('url', 'title','text',)

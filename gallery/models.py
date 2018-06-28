@@ -1,26 +1,19 @@
 from django.db import models
 from django.utils import timezone
+from blog.models import AbstractPost
 # Create your models here.
 
-class Media(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    description = models.CharField(max_length=240)
-    created_date = models.DateTimeField(
-            default=timezone.now)
-    published_date = models.DateTimeField(
-            blank=True, null=True)
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
 
-    def __str__(self):
-        return self.description
+class Photo(AbstractPost):
+    img = models.FileField(upload_to='photos/')
 
+class Video(AbstractPost):
 
-# class Photo(Media):
-#     #come mettere un'immagine?
-#     pass
+    url=models.CharField(max_length=255)
+    modified_url=models.CharField(max_length=50)
 
-# class Video(Media):
-#     #come mettere un video?
-#     pass
+    def save(self, *args, **kwargs):
+        temp=self.url.split("/")
+        temp_url=temp[-1]
+        self.modified_url=temp_url.replace("watch?v=","")
+        super(Model, self).save(*args, **kwargs)

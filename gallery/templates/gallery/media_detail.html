@@ -1,0 +1,27 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+     <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+{% endif %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+    <div>
+        {% for comment in comment_list%}
+        <h2>{{ comment.author }}</h2>
+        <p>{{ comment.comment|linebreaksbr }}</p>
+        {% endfor %}
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Comment</button>
+    </form>
+    </div>
+
+{% endblock %}

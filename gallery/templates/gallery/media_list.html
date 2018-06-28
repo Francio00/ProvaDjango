@@ -1,0 +1,26 @@
+{% extends 'gallery/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    {% if photos %}
+    {% for photo in photos %}
+        <div class="post">
+            <div class="date">
+                {{ photo.published_date }}
+            </div>
+            <h1><a href="{% url 'photo_detail' pk=photo.pk %}">{{ photo.title }}</a></h1>
+            <p>{{ photo.text|linebreaksbr }}</p>
+            <img src="{{photo.img.url}}">
+        </div>
+    {% endfor %}
+    {% elif videos %}
+    {% for video in videos %}
+        <div class="post">
+            <div class="date">
+                {{ video.published_date }}
+            </div>
+            <h1><a href="{% url 'video_detail' pk=video.pk %}">{{ video.title }}</a></h1>
+            <p>{{ video.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endblock%}
