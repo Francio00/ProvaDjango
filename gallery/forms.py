@@ -6,9 +6,3 @@ class MediaForm(forms.ModelForm)
         model=Media
         fields=('author','description',)
 
-class CommentForm(forms.ModelForm):
-    """docstring for CommentForm"""
-    class Meta:
-        model=Comments
-        fields=('comment','author',)
-
