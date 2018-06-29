@@ -1,7 +1,7 @@
-{% extends 'gallery/base.html' %}
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-    {% if photos %}
+    {% if photo %}
     {% for photo in photos %}
         <div class="post">
             <div class="date">
@@ -12,7 +12,7 @@
             <img src="{{photo.img.url}}">
         </div>
     {% endfor %}
-    {% elif videos %}
+    {% elif video %}
     {% for video in videos %}
         <div class="post">
             <div class="date">
@@ -20,6 +20,7 @@
             </div>
             <h1><a href="{% url 'video_detail' pk=video.pk %}">{{ video.title }}</a></h1>
             <p>{{ video.text|linebreaksbr }}</p>
+            <iframe width="400" height="200" src="https://www.youtube.com/embed/{{video.modified_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     {% endfor %}
     {% endif %}

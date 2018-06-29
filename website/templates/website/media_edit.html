@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if photo %}
+    <h1>New Photo</h1>
+    <form enctype="multi-part/form-data" method="POST" class="post-form">{% csrf_token %}
+        {{ photo.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    {% if photoID %}
+    <form method="POST" class="post-form" action="/post/{{photoID}}/delete/">{% csrf_token %}
+        <input type="text" name="pappardella" hidden value="{{photoID}}">
+        <button type="submit" class="save btn btn-default">Delete</button>
+    </form>
+    {% endif %}
+{% elif video %}
+    <h1>New Video</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ video.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    {% if videoID %}
+    <form method="POST" class="post-form" action="/post/{{videoID}}/delete/">{% csrf_token %}
+        <input type="text" name="pappardella" hidden value="{{videoID}}">
+        <button type="submit" class="save btn btn-default">Delete</button>
+    </form>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

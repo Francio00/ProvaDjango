@@ -16,4 +16,4 @@ class Video(AbstractPost):
         temp=self.url.split("/")
         temp_url=temp[-1]
         self.modified_url=temp_url.replace("watch?v=","")
-        super(Model, self).save(*args, **kwargs)
+        super(Video, self).save(*args, **kwargs)

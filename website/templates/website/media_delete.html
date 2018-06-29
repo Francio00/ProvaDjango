@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% if "photo" in request.path" %}
+<h1>Questa dovrebbe essere una<strong><em> FOTO CANCELLATA </em></strong></h1>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+    <p>foto cancellata</p>
+    <button onclick="window.location.href = '/'">premimi che sono depresso</button>
+{% elif "video" in request.path %}
+<h1>Questo dovrebbe essere un<strong><em> VIDEO CANCELLATO </em></strong></h1>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+    <p>video cancellato</p>
+    <button onclick="window.location.href = '/'">premimi che sono depresso</button>
+{% endif %}
+{% endblock%}

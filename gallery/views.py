@@ -19,35 +19,34 @@ def comment_new(request):
     else:
         form = CommentForm()
     #return render(request, 'blog/post_edit.html', {'form': form})
-from django.shortcuts import render
 
 # Create your views here.
-def media_new(request, pk):
+def media_new(request):
     if "photo" in request.path:
         if request.method == "POST":
-            form = PhotoForm(request.POST)
-        if form.is_valid():
-            photo = form.save(commit=False)
-            photo.author = request.user
-            photo.published_date = timezone.now()
-            photo.save()
-            return redirect('media_detail', pk=photo.pk)
+            form = PhotoForm(request.POST, request.FILES)
+            if form.is_valid():
+                photo = form.save(commit=False)
+                photo.author = request.user
+                photo.published_date = timezone.now()
+                photo.save()
+                return redirect('photo_detail', pk=photo.pk)
         else:
             form = PhotoForm()
-        return render(request, 'gallery/media_edit.html', {'form': form})
+        return render(request, 'media_edit.html', {'photo': form})
 
     elif "video" in request.path:
         if request.method == "POST":
             form = VideoForm(request.POST)
-        if form.is_valid():
-            video = form.save(commit=False)
-            video.author = request.user
-            video.published_date = timezone.now()
-            video.save()
-            return redirect('media_detail', pk=video.pk)
+            if form.is_valid():
+                video = form.save(commit=False)
+                video.author = request.user
+                video.published_date = timezone.now()
+                video.save()
+                return redirect('video_detail', pk=video.pk)
         else:
             form = VideoForm()
-        return render(request, 'gallery/media_edit.html', {'form': form})
+        return render(request, 'media_edit.html', {'video': form})
 
     else:
         return HttpResponse(status=404)
@@ -57,29 +56,29 @@ def media_edit(request, pk):
     if "photo" in request.path:
         photo = get_object_or_404(Photo, pk=pk)
         if request.method == "POST":
-            form = PhotoForm(request.POST, instance=photo)
-        if form.is_valid():
-            photo = form.save(commit=False)
-            photo.author = request.user
-            photo.published_date = timezone.now()
-            photo.save()
-            return redirect('media_detail', pk=photo.pk)
+            form = PhotoForm(request.POST, request.FILES, instance=photo)
+            if form.is_valid():
+                photo = form.save(commit=False)
+                photo.author = request.user
+                photo.published_date = timezone.now()
+                photo.save()
+                return redirect('photo_detail', pk=photo.pk)
         else:
             form = PhotoForm(instance=photo)
-        return render(request, 'gallery/media_edit.html', {'form': form,'photoID': photo.pk})
+        return render(request, 'media_edit.html', {'photo': form,'photoID': photo.pk})
     elif "video" in request.path:
         video = get_object_or_404(Video, pk=pk)
         if request.method == "POST":
             form = VideoForm(request.POST, instance=video)
-        if form.is_valid():
-            video = form.save(commit=False)
-            video.author = request.user
-            video.published_date = timezone.now()
-            video.save()
-            return redirect('media_detail', pk=video.pk)
+            if form.is_valid():
+                video = form.save(commit=False)
+                video.author = request.user
+                video.published_date = timezone.now()
+                video.save()
+                return redirect('video_detail', pk=video.pk)
         else:
             form = VideoForm(instance=video)
-        return render(request, 'gallery/media_edit.html', {'form': form,'videoID': video.pk})
+        return render(request, 'media_edit.html', {'video': form,'videoID': video.pk})
     else:
         return HttpResponse(status=404)
 
@@ -87,10 +86,10 @@ def media_edit(request, pk):
 def media_list(request):
     if "photo" in request.path:
         photo= Photo.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-        return render(request,'gallery/media_list.html', {'photos': photo})
+        return render(request,'media_list.html', {'photos': photo})
     elif "video" in request.path:
         video= Video.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-        return render(request,'gallery/media_list.html', {'videos': video})
+        return render(request,'media_list.html', {'videos': video})
     else:
         return HttpResponse(status=404)
 
@@ -107,7 +106,7 @@ def media_details(request,pk):
             comment.save()
         else:
             form = CommentForm()
-            return render(request, 'gallery/media_detail.html', {'photo': photo, 'comment_list' : comment_list, 'form':form})
+            return render(request, 'media_detail.html', {'photo': photo, 'comment_list' : comment_list, 'form':form})
     elif "video" in request.path:
         video = get_object_or_404(Video, pk=pk)
         comment_list= Comments.objects.filter(video=video)
@@ -120,7 +119,7 @@ def media_details(request,pk):
             comment.save()
         else:
             form = CommentForm()
-        return render(request, 'gallery/media_detail.html', {'video': video, 'comment_list' : comment_list, 'form':form})
+        return render(request, 'media_detail.html', {'video': video, 'comment_list' : comment_list, 'form':form})
     else:
         return HttpResponse(status=404)
 
@@ -129,11 +128,11 @@ def media_delete(request,pk):
     if "photo" in request.path:
         photo=get_object_or_404(Photo,pk=pk)
         photo.delete()
-        return render(request,'gallery/deleted_photo.html',{})
+        return render(request,'deleted_photo.html',{})
     elif "video" in request.path:
         video=get_object_or_404(Video,pk=pk)
         video.delete()
-        return render(request,'gallery/deleted_video.html',{})
+        return render(request,'deleted_video.html',{})
     else:
         return HttpResponse(status=404)
 
